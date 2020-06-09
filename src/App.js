@@ -1,25 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Character } from './Character';
 
-function App() {
+function App({side}) {
+
+  if (!side) {
+    side = 'light'
+  }
+  
+  const characters = [
+    {name: 'Luke Skywalker', side: 'light'},
+    {name: 'Yoda', side: 'light'},
+    {name: 'Obi-Wan Kenobi', side: 'light'},
+    {name: 'Palpatine', side: 'dark'},
+    {name: 'Darth Vader ', side: 'dark'},
+  ]
+
+  const filteredChars = characters.filter(char => char.side === side)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ul>
+     {filteredChars.map((char, index) => (
+       <Character key={char.name + index} name={char.name} side={char.side} />
+     ))}
+    </ul>
   );
 }
 
